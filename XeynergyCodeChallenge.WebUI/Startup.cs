@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using XeynergyCodeChallenge.Application;
 using XeynergyCodeChallenge.Infrastructure.Persistence;
+using XeynergyCodeChallenge.WebUI.Filters;
 
 namespace XeynergyCodeChallenge.WebUI
 {
@@ -23,7 +24,11 @@ namespace XeynergyCodeChallenge.WebUI
         {
             services.AddApplication();
             services.AddInfrastructure(Configuration);
-            services.AddControllers();
+
+            services.AddControllers(options =>
+                options.Filters.Add<ApiExceptionFilterAttribute>())
+                .AddXmlSerializerFormatters();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "XeynergyCodeChallenge.WebUI", Version = "v1" });
