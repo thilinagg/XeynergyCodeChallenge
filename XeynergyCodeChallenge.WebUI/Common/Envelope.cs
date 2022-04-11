@@ -26,12 +26,6 @@ namespace XeynergyCodeChallenge.WebUI.Common
         public static Envelope<T> Ok<T>(T result) =>
             new(result, string.Empty, success: true);
 
-        public static Envelope Ok() =>
-            new(string.Empty, success: true);
-
-        public static Envelope Error(string errorMessage) =>
-            new(errorMessage);
-
         public static Envelope<T> Error<T>(string errorMessage) =>
             new(default, errorMessage);
     }
